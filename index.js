@@ -148,6 +148,7 @@ const app = Vue.createApp({
         });
     },
     onSubmit(){
+      this.isLoading = true;
       const url = `${baseUrl}/api/${path}/order`;
       const data = {
         "user": {
@@ -166,6 +167,7 @@ const app = Vue.createApp({
           this.$refs.form.resetForm();
           // message 並未受到 v-field 控管
           this.formParams.message = '';
+          this.isLoading = false;
         })
         .catch((err) => {
           Swal.fire({
