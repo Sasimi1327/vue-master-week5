@@ -79,6 +79,7 @@
           <!-- 購物車列表 -->
           <div class="text-end">
             <button class="btn btn-outline-danger" type="button"
+            :disabled="carts?.carts?.length === 0"
               @click="removeCart('')"
             >
               清空購物車
@@ -149,7 +150,8 @@
         <!-- Form Table -->
         <div class="my-5 row justify-content-center">
           
-          <v-form ref="form" class="col-md-6" v-slot="{ errors }" @submit="onSubmit">
+          <v-form ref="form" class="col-md-6" validate-on-mount v-slot="{ errors }" @submit="onSubmit">
+
             <!-- Email：必填 / 需要符合格式 / input type 為 email -->
             <div class="mb-3">
               <label for="email" class="form-label">電子郵件</label>
@@ -203,7 +205,7 @@
             </div>
             <div class="text-end">
               <button type="submit" class="btn btn-danger"
-                  :disabled="carts?.carts?.length === 0"
+                  :disabled="carts?.carts?.length === 0 || Object.keys(errors).length"
               >送出訂單</button>
             </div>
           </v-form>
